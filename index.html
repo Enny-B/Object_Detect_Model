@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mouse Detection</title>
+</head>
+<body>
+    <h1>Upload Mouse Image</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" required>
+        <button type="submit">Detect</button>
+    </form>
+
+    {% if mouse_img %}
+        <h2>Result:</h2>
+        <img src="{{ url_for('static', filename=mouse-7.jpg) }}" alt="Detection Result" width="500">
+
+        {% if detections %}
+            <ul>
+                {% for label, confidence in detections %}
+                    <li>{{ label }} ({{ confidence }})</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No objects detected.</p>
+        {% endif %}
+    {% endif %}
+</body>
+</html>
